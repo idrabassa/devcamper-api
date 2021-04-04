@@ -17,12 +17,12 @@ const BootcampSchema =new mongoose.Schema({
         maxlenght:[500,'Description cannot be more than 500  characters']
     },
 
-    website:{
-       match:[
-            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
-            'Please enter a value URL with http or https'
-        ]
-    },
+    // website:{
+    //    match:[
+    //         /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+    //         'Please enter a value URL with http or https'
+    //     ]
+    // },
 
     phone:{
         type:String,
@@ -108,4 +108,4 @@ const BootcampSchema =new mongoose.Schema({
     
 })
 
-module.exports=mongoose.model('Bootcamp',BootcampSchema)
+module.exports = mongoose.model('Bootcamp',BootcampSchema)

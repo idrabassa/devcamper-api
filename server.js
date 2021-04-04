@@ -17,6 +17,9 @@ const bootcamps = require('./routes/bootcamps')
 
 const app =express()
 
+//Body Parser
+app.use(express.json())
+
 //middleware
 // app.use(logger )
 //Devlogging middeware 

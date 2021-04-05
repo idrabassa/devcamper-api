@@ -3,8 +3,13 @@ const Bootcamp= require('../modules/Bootcamp')
 //@desc    Get all bootcamps
 //@route   Get  /api/v1/bootcamps
 //@access  Public
-exports.getBootcamps = (req,res,next)=>{
-    res.status(200).json({success:true,msg:"Show all bootcamps"})
+exports.getBootcamps = async (req,res,next)=>{
+    try {
+        const bootcamps=await Bootcamp.find()
+        res.status(200).json({success:true,data:bootcamps})
+    } catch (error) {
+        res.status(400).json({success:false})
+    }
 }
 
 //@desc    Get single bootcamp
@@ -18,10 +23,13 @@ exports.getBootcamp = (req,res,next)=>{
 //@route   Post  /api/v1/bootcamps
 //@access  Private
 exports.createBootcamp = async (req,res,next)=>{
+    try{
     const bootcamp=await Bootcamp.create(req.body)
     // console.log(req.body);
     // res.status(200).json({success:true,msg:"Create new bootcamp"})
-    res.status(201).json({success:true,data:bootcamp})
+    res.status(201).json({success:true,data:bootcamp})}catch(err){
+        res.status(400).json({success:false})
+    }
 }
 
 //@desc    Update bootcamp

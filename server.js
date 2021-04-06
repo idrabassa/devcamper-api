@@ -3,6 +3,7 @@ const dotenv = require("dotenv")
 const morgan =require('morgan')
 const connectDB=require('./config/db')
 const colors =require('colors')
+const errorHandler=require('./middleware/error')
 // const logger=require('./middleware/logger')
 
 
@@ -19,19 +20,19 @@ const app =express()
 
 //Body Parser
 app.use(express.json())
-
+app.use(errorHandler)
 //middleware
 // app.use(logger )
 //Devlogging middeware 
-if (process.env.NODE_ENV=== 'development') {
+if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 // Mount routers
 app.use('/api/v1/bootcamps',bootcamps);
 
-const PORT =process.env.PORT || 5000
+const PORT = process.env.PORT || 5000
 
-const server=app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}!`.yellow.bold)
 });
 

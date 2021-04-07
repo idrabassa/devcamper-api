@@ -20,7 +20,7 @@ const app =express()
 
 //Body Parser
 app.use(express.json())
-app.use(errorHandler)
+
 //middleware
 // app.use(logger )
 //Devlogging middeware 
@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // Mount routers
 app.use('/api/v1/bootcamps',bootcamps);
-
+app.use(errorHandler)
 const PORT = process.env.PORT || 5000
 
 const server = app.listen(PORT, () => {

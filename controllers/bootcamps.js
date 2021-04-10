@@ -10,10 +10,9 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     //Copy request query
     const reqQuery = {...req.query}
     //fields to exclude
-    const removeFields =['select']
+    const removeFields = ['select']
     //loop over remove fields and delete them from query
     removeFields.forEach(params => delete reqQuery[params])
-    console.log(reqQuery );
     //create query string
     let queryStr =JSON.stringify(req.query)
     //create operator ($gt,$gte,etc)
@@ -23,10 +22,12 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     //select fields
     if (req.query.select) {
         const fields =  req.query.select.split(',').join(' ')
+        console.log(fields);
         query = query.select(fields)
+        console.log(query);
     }
     //executing query
-    const bootcamps = await Bootcamp.find(query);
+    const bootcamps = await query;
     res.status(200).json({ success: true,count:bootcamps.length,data: bootcamps });
     
 });

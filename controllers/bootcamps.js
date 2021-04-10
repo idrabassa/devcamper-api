@@ -12,19 +12,20 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     //fields to exclude
     const removeFields = ['select']
     //loop over remove fields and delete them from query
-    removeFields.forEach(params => delete reqQuery[params])
+    removeFields.forEach(param => delete reqQuery[param])
+
+    console.log(reqQuery)
     //create query string
-    let queryStr =JSON.stringify(req.query)
+    let queryStr = JSON.stringify(req.query)
     //create operator ($gt,$gte,etc)
-    queryStr = queryStr.replace(/\b(gt|gte|lte|in)\b/g, match =>`$${match}` )
+    queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match =>`$${match}` )
     //finding resource
     query=Bootcamp.find(JSON.parse(queryStr))
     //select fields
     if (req.query.select) {
         const fields =  req.query.select.split(',').join(' ')
-        console.log(fields);
         query = query.select(fields)
-        console.log(query);
+        
     }
     //executing query
     const bootcamps = await query;

@@ -13,8 +13,6 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     const removeFields = ['select']
     //loop over remove fields and delete them from query
     removeFields.forEach(param => delete reqQuery[param])
-
-    console.log(reqQuery)
     //create query string
     let queryStr = JSON.stringify(req.query)
     //create operator ($gt,$gte,etc)
@@ -29,7 +27,7 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     }
     //executing query
     const bootcamps = await query;
-    res.status(200).json({ success: true,count:bootcamps.length,data: bootcamps });
+    res.status(200).json({ success: true,count:bootcamps.length,data: bootcamps })
     
 });
 

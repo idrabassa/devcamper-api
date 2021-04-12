@@ -34,9 +34,11 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     const page = parseInt(req.query.page,10)||1 
     const limit =parseInt(req.query.limit,10)||100
     const skip =(page - 1 ) * limit 
-    query=query.skip(skip)
+    console.log(page,limit,skip);
+    query=query.skip(skip).limit(limit)
     //executing query
-    const bootcamps = await query;
+    const bootcamps = await Bootcamp.find(query);
+    console.log(bootcamps)
     res.status(200).json({ success: true,count:bootcamps.length,data: bootcamps })
     
 });

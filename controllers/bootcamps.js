@@ -6,7 +6,8 @@ const geocoder = require("../utils/geocoder");
 //@route   Get  /api/v1/bootcamps
 //@access  Public
 exports.getBootcamps = asyncHandler(async (req, res, next) => {
-    let query 
+    let query;
+    // console.log(query);
     //Copy request query
     const reqQuery = {...req.query}
     //fields to exclude
@@ -37,8 +38,9 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
     console.log(page,limit,skip);
     query=query.skip(skip).limit(limit)
     //executing query
-    const bootcamps = await Bootcamp.find(query);
-    console.log(bootcamps)
+    const bootcamp = await query;
+    //const bootcamps = await query;
+    //console.log(bootcamps)
     res.status(200).json({ success: true,count:bootcamps.length,data: bootcamps })
     
 });

@@ -6,6 +6,7 @@ const connectDB=require('./config/db')
 const colors =require('colors')
 const errorHandler=require('./middleware/error')
 const fileUpload=require('express-fileupload')
+const cookieParser = require('cookie-parser');
 // const logger=require('./middleware/logger')
 
 
@@ -25,6 +26,7 @@ const app = express()
 app.use(express.json())
 
 //middleware
+app.use(cookieParser())
 // app.use(logger )
 //Devlogging middeware 
 if (process.env.NODE_ENV === 'development') {

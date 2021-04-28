@@ -14,7 +14,7 @@ const User =require('./modules/User')
 
 //connect to db
 
-const conn =mongoose.connect(process.env.MONGO_URI,{
+const conn = mongoose.connect(process.env.MONGO_URI,{
     useNewUrlParser:true,
     useCreateIndex:true,
     useFindAndModify:false,
@@ -24,7 +24,7 @@ const conn =mongoose.connect(process.env.MONGO_URI,{
 //read the JSON files
 const bootcamps =JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`,'utf-8'))
 const courses =JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`,'utf-8'))
-const users =JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`,'utf-8'))
+const users =JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`,'utf-8'))
 
 
 //import into DB

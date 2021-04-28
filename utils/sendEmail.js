@@ -15,7 +15,7 @@ const sendMail=async (options)=>{
 
   // send mail with defined transport object
   let message = {
-    from: `${proccess.env.FROM_NAME}<${process.env.FROM_EMAIL}>`, // sender address
+    from: `${process.env.FROM_NAME}<${process.env.FROM_EMAIL}>`, // sender address
     to: options.email, // list of receivers
     subject: options.subject, // Subject line
     text: options.message, // plain text body

@@ -10,6 +10,7 @@ dotenv.config({path:'./config/config.env'})
 
 const Bootcamp =require('./modules/Bootcamp')
 const Course =require('./modules/Course')
+const User =require('./modules/User')
 
 //connect to db
 
@@ -23,6 +24,8 @@ const conn =mongoose.connect(process.env.MONGO_URI,{
 //read the JSON files
 const bootcamps =JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`,'utf-8'))
 const courses =JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`,'utf-8'))
+const users =JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`,'utf-8'))
+
 
 //import into DB
 
@@ -30,6 +33,7 @@ const importData = async ()=>{
     try {
         await Bootcamp.create(bootcamps)
         await Course.create(courses)
+        await User.create(users)
         console.log('Data imported ...'.green.inverse);
         process.exit()
     } catch (error) {
@@ -41,6 +45,7 @@ const deleteData = async ()=>{
     try {
         await Bootcamp.deleteMany()
         await Course.deleteMany()
+        await User.deleteMany()
         console.log('Data destroyed ...'.red.inverse);
         process.exit()
     } catch (error) {

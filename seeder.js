@@ -11,7 +11,7 @@ dotenv.config({path:'./config/config.env'})
 const Bootcamp =require('./modules/Bootcamp')
 const Course =require('./modules/Course')
 const User =require('./modules/User')
-const Review =require('./modules/Reviews')
+const Review =require('./modules/Review')
 //connect to db
 
 const conn = mongoose.connect(process.env.MONGO_URI,{
@@ -36,7 +36,7 @@ const importData = async ()=>{
         await Bootcamp.create(bootcamps)
         await Course.create(courses)
         await User.create(users)
-        await User.create(reviews)
+        await Review.create(reviews)
         console.log('Data imported ...'.green.inverse);
         process.exit()
     } catch (error) {

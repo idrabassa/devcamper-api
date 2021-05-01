@@ -6,7 +6,13 @@ const connectDB=require('./config/db')
 const colors =require('colors')
 const errorHandler=require('./middleware/error')
 const fileUpload=require('express-fileupload')
+const helmet = require('helmet')
+const xss = require('xss-clean')
+const hpp = require('hpp')
+const cors = require('cors')
+const rateLimit = require('express-rate-limit')
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize') 
 // const logger=require('./middleware/logger')
 
 
@@ -36,6 +42,31 @@ if (process.env.NODE_ENV === 'development') {
 }
 //file uploading
 app.use(fileUpload())
+
+//Sanitize data
+app.use(mongoSanitize())
+
+//Set security headers
+app.use(helmet())
+
+//Prevent xss attacks
+app.use(xss())
+
+//Rate limiting
+const limiter = rateLimit({
+    windowMs:10*60*1000 ,//10 mins
+    max:100
+})
+
+app.use(limiter)
+
+//prevent http params pollutions
+app.use(hpp())
+
+//Enabld CORS
+app.use(cors())
+
+
 //set static folder
 app.use(express.static(path.join(__dirname,'public')))
 // Mount routers
